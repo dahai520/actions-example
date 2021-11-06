@@ -22,4 +22,17 @@ jobs:
         # cache: 'npm'
     - run: npm install
     - run: npm run test
+    - uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} 
+        # 要配置在 GitHub Action 平台里的那个 Codecov token
+        files: /home/runner/work/example/example/reports/clover.xml
+        # 这是覆盖率文件生成的地址
+        # 其中 example/example 是对应项目的目录名称
+        # 一般名称 abcdef 那么这里就是 abcdef/abcdef
+        # reports/ 目录是 jest.confg.js 里配置生成的目录地址
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true
+        verbose: true
    
